@@ -3,7 +3,7 @@
 
 #include "shape.h"
 #include <vector>
-#include <memory> 
+#include <memory>
 
 class CompositeShape : public Shape
 {
