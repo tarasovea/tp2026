@@ -8,7 +8,7 @@
 Ring::Ring(const Point& center, double outerRadius, double innerRadius)
     : center(center), outerRadius(outerRadius), innerRadius(innerRadius) {
     if (outerRadius <= innerRadius) {
-        outerRadius = innerRadius + 1.0; 
+        outerRadius = innerRadius + 1.0;
     }
 }
 
