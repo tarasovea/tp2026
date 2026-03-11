@@ -1,4 +1,6 @@
-#pragma once
+#ifndef RING_H
+#define RING_H
+
 #include "Shape.h"
 
 class Ring : public Shape {
@@ -9,10 +11,11 @@ private:
 
 public:
     Ring(const Point& center, double outRad, double inRad);
-
     double getArea() const override;
     Point getCenter() const override;
     void move(double dx, double dy) override;
     void scale(double factor) override;
     std::string getName() const override;
 };
+
+#endif // RING_H

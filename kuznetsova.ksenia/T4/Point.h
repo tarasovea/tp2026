@@ -1,4 +1,6 @@
-#pragma once
+#ifndef POINT_H
+#define POINT_H
+
 struct Point
 {
     double x = 0.0;
@@ -8,3 +10,4 @@ struct Point
     Point(double xval, double yval) : x(xval), y(yval) {};
 };
 
+#endif // POINT_H
