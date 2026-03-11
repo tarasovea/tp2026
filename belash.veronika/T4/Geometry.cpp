@@ -35,8 +35,10 @@ void printInfo(const std::vector<std::unique_ptr<Shape>>& shapes) {
 }
 
 int main(int argc, char* argv[]) {
+    (void)argc;
+    (void)argv;
     if (argc == 1) {
-        std::cerr << "Error: No input provided" << std::endl;
+        std::cerr << "Error: No input provided" << '\n';
         return 1;
     }
     try {
