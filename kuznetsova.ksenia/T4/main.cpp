@@ -195,7 +195,6 @@ void testBoundingBox() {
 
     CompositeShape composite;
 
-    // Add shapes at corners
     composite.addShape(std::make_unique<Square>(Point(0, 0), 1));
     composite.addShape(std::make_unique<Square>(Point(8, 0), 1));
     composite.addShape(std::make_unique<Square>(Point(0, 6), 1));
