@@ -1,5 +1,8 @@
 #include "Composite_shape.h"
-void CompositeShape::addShape(std::unique_ptr<Shape> shape) { shapes.push_back(std::move(shape)); }
+void CompositeShape::addShape(std::unique_ptr<Shape> shape)
+{
+    shapes.push_back(std::move(shape));
+}
 double CompositeShape::getArea()
 {
     double total = 0;
