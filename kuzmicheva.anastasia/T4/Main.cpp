@@ -29,6 +29,8 @@ int main() {
         shapes.push_back(std::make_unique<Rectangle>(Point(0, 0), Point(2.7, 4.4)));
         shapes.push_back(std::make_unique<Circle>(Point(3.3, 5.7), 6.8));
         shapes.push_back(std::make_unique<Rhomb>(Point(7.7, 9), 4, 6.8));
+        shapes.push_back(std::make_unique<Rectangle>(Point(1.1, 1.1), Point(2.89, 7.0)));
+        shapes.push_back(std::make_unique<Rhomb>(Point(-1.2, 5.3), 9, 12.5));
 
         auto rect = std::make_unique<Rectangle>(Point(0, 0), Point(2, 2));
         auto circ = std::make_unique<Circle>(Point(5, 5), 3.0);
