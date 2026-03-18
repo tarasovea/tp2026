@@ -1,5 +1,6 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
+#include <iostream>
 #include "Shape.h"
 class Rectangle : public Shape
 {
@@ -14,6 +15,7 @@ public:
     double getX_max() override;
     double getY_min() override;
     double getY_max() override;
+    void print() override;
 private:
     Point A;
     Point B;
