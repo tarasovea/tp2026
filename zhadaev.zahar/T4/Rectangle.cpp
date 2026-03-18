@@ -30,3 +30,7 @@ double Rectangle::getY_max()
 {
     return B.y;
 }
+void Rectangle::print()
+{
+    std::cout << "[" << getName() << ", (" << getCenter().x << ", " << getCenter().y << "), " << getArea() << "]\n";
+}
