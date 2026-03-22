@@ -34,6 +34,8 @@ static void printShape(const Shape& shape) {
 }
 
 int main() {
+    const double SCALE_FACTOR = 2.0;
+
     std::vector<std::unique_ptr<Shape>> shapes;
 
     shapes.push_back(std::make_unique<Rectangle>(Point(0, 0), Point(4, 3)));
@@ -54,7 +56,7 @@ int main() {
     }
 
     for (auto& s : shapes) {
-        s->scale(2.0);
+        s->scale(SCALE_FACTOR);
     }
 
     std::cout << std::endl << "After scaling (x2):" << std::endl;

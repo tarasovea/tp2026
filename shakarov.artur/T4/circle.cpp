@@ -1,13 +1,11 @@
 #include "circle.h"
 #include <cmath>
 
-const double PI = 3.14159265358979323846;
-
 Circle::Circle(const Point& center, double radius)
     : center_(center), radius_(radius) {}
 
 double Circle::getArea() const {
-    return PI * radius_ * radius_;
+    return M_PI * radius_ * radius_;
 }
 
 Point Circle::getCenter() const {
