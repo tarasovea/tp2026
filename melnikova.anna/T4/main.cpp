@@ -8,14 +8,12 @@
 #include "circle.h"
 #include "isosceles_trapezoid.h"
 #include "composite_shape.h"
-
 static void printShape(const Shape& s)
 {
     Point c = s.getCenter();
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "[" << s.getName() << ", (" << c.x << ", " << c.y << "), " << s.getArea() << "]" << std::endl;
 }
-
 static void printComposite(const CompositeShape& cs)
 {
     Point c = cs.getCenter();
@@ -32,7 +30,6 @@ static void printComposite(const CompositeShape& cs)
     }
     std::cout << "]" << std::endl;
 }
-
 int main()
 {
     if (!(std::cin >> std::ws) || std::cin.eof()) {
@@ -43,38 +40,30 @@ int main()
     shapes.push_back(std::make_unique<IsoscelesTrapezoid>(Point{ 1.0, 2.0 }, 4.0, 2.0, 2.0));
     shapes.push_back(std::make_unique<IsoscelesTrapezoid>(Point{ 2.0, 4.0 }, 2.0, 1.0, 2.0));
     shapes.push_back(std::make_unique<Circle>(Point{ 3.0, 7.0 }, 1.0));
-
     auto composite = std::make_unique<CompositeShape>(std::move(shapes));
-
     Rectangle rect1({ 1.0, 1.0 }, { 4.0, 3.0 });
     Rectangle rect2({ 0.0, 0.0 }, { 5.0, 2.0 });
     Circle circ1({ 2.0, 2.0 }, 3.0);
     IsoscelesTrapezoid trap1({ 0.0, 0.0 }, 8.0, 4.0, 3.0);
-
     printShape(rect1);
     printShape(rect2);
     printShape(circ1);
     printShape(trap1);
     printComposite(*composite);
-
-    
     double coeff;
     if (!(std::cin >> coeff)) {
         std::cerr << "error" << std::endl;
         return 1;
     }
-
     rect1.scale(coeff);
     rect2.scale(coeff);
     circ1.scale(coeff);
     trap1.scale(coeff);
     composite->scale(coeff);
-
     printShape(rect1);
     printShape(rect2);
     printShape(circ1);
     printShape(trap1);
     printComposite(*composite);
-
     return 0;
 }
