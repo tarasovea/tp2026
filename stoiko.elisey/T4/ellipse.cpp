@@ -1,94 +1,44 @@
-#include "composite_shape.h"
-#include "point.h"
-#include <cstddef>
-#include <iomanip>
-#include <utility>
+#include "ellipse.h"
 
-void CompositeShape::addShape(std::unique_ptr<Shape> shape) {
-    if (shape) {
-        shapes.push_back(std::move(shape));
-    }
+Ellipse::Ellipse(const Point& center, double horizontal_radius, double vertical_radius)
+    : center(center)
+    , horizontal_radius(horizontal_radius)
+    , vertical_radius(vertical_radius)
+{}
+
+double Ellipse::getArea() const {
+    return M_PI * horizontal_radius * vertical_radius;
 }
 
-double CompositeShape::getArea() const {
-    double area = 0.0;
-    for (std::size_t i = 0; i < shapes.size(); ++i) {
-        area += shapes[i]->getArea();
-    }
-    return area;
+Point Ellipse::getCenter() const {
+    return center;
 }
 
-Point CompositeShape::getCenter() const {
-    std::pair<Point, Point> bounds = getBounds();
-    return Point((bounds.first.x + bounds.second.x) / 2.0,
-                 (bounds.first.y + bounds.second.y) / 2.0);
+void Ellipse::move(double dx, double dy)  {
+    center.x += dx;
+    center.y += dy;
 }
 
-
-void CompositeShape::move(double dx, double dy) {
-    for (std::size_t i = 0; i < shapes.size(); ++i) {
-        shapes[i]->move(dx, dy);
-    }
+void Ellipse::scale(double factor)  {
+    horizontal_radius *= factor;
+    vertical_radius *= factor;
 }
 
-void CompositeShape::scale(double factor) {
-    Point compositeCenter = getCenter();
-
-    for (std::size_t i = 0; i < shapes.size(); ++i) {
-        Point shapeCenter = shapes[i]->getCenter();
-
-        Point newShapeCenter(
-            compositeCenter.x + (shapeCenter.x - compositeCenter.x) * factor,
-            compositeCenter.y + (shapeCenter.y - compositeCenter.y) * factor
-        );
-
-        shapes[i]->move(
-            newShapeCenter.x - shapeCenter.x,
-            newShapeCenter.y - shapeCenter.y
-        );
-
-        shapes[i]->scale(factor);
-    }
+std::string Ellipse::getName() const {
+    return "ELLIPSE";
 }
 
-std::string CompositeShape::getName() const {
-    return "COMPOSITE";
+std::pair<Point, Point> Ellipse::getBounds() const {
+    return {
+        Point(center.x - vertical_radius, center.y - horizontal_radius),
+        Point(center.x + vertical_radius, center.y + horizontal_radius)
+    };
 }
 
-std::pair<Point, Point> CompositeShape::getBounds() const {
-    if (shapes.empty()) {
-        throw std::logic_error("CompositeShape is empty");
-    }
-
-    std::pair<Point, Point> temp = shapes[0]->getBounds();
-    Point temp_min = temp.first;
-    Point temp_max = temp.second;
-
-    for (std::size_t i = 1; i < shapes.size(); ++i) {
-        std::pair<Point, Point> current = shapes[i]->getBounds();
-        Point cur_min = current.first;
-        Point cur_max = current.second;
-
-        temp_min.x = (cur_min.x < temp_min.x) ? cur_min.x : temp_min.x;
-        temp_min.y = (cur_min.y < temp_min.y) ? cur_min.y : temp_min.y;
-        temp_max.x = (cur_max.x > temp_max.x) ? cur_max.x : temp_max.x;
-        temp_max.y = (cur_max.y > temp_max.y) ? cur_max.y : temp_max.y;
-    }
-
-    return std::make_pair(Point(temp_min.x, temp_min.y), Point(temp_max.x, temp_max.y));
-}
-
-void CompositeShape::print(std::ostream& stream) const {
+void Ellipse::print(std::ostream& stream) const {
     Point center = getCenter();
     stream << "[";
     stream << getName() << ", ";
     stream << "(" << center.x << ", " << center.y << ")" << ", ";
-    stream << getArea() << ":\n";
-
-    for (const auto& shape : shapes) {
-        stream << std::setw(4);
-        shape->print(stream);
-        stream << ",\n";
-    }
-    stream << "]";
+    stream << getArea() << "]";
 }
